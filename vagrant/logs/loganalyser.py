@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 import psycopg2
 
 DBNAME = "news"
@@ -19,7 +21,7 @@ def top_posts():
     WHERE log.path = '/article/' || articles.slug
     GROUP BY articles.title
     ORDER BY num desc
-    LIMIT 5;
+    LIMIT 3;
   """
     return fetchFromDatabase(query)
 
