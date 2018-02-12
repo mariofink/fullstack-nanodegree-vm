@@ -1,5 +1,12 @@
 # Logs Analysis project
 
+This program analyses the logs of a fictive news page. It answers the following questions:
+
+* What are the top 3 posts?
+* Who are the top authors?
+* On which days did the log contain more than 1% of errors?
+
+
 ## Database setup
 
 * Bring up the Vagrant-based virtual machine by running
