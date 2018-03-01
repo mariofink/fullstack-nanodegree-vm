@@ -27,7 +27,8 @@ class Product(Base):
 class User(Base):
     __tablename__ = 'user'
 
-    id = Column(String(250), primary_key=True)
+    id = Column(Integer, primary_key=True)
+    userid = Column(String(250), nullable=False)
     name = Column(String(250), nullable=False)
     password = Column(Text, nullable=False)
 
