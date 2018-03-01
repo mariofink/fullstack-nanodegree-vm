@@ -1,11 +1,11 @@
 {% extends "base.html" %}
-{% block title %}Product list{% endblock %}
+{% block title %}{{ product.name|e }}{% endblock %}
 {% block content %}
 <h2 class="is-size-2">{{ product.name|e }}</h2>
 <div class="content">
     <h3 class="is-size-3">Category</h3>
     <p>
-        {{ product.category.name|e }}
+        <a href="/category/{{ product.category.id }}">{{ product.category.name|e }}</a>
     </p>
 
     <h3 class="is-size-3">Description</h3>

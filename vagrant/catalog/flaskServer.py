@@ -1,5 +1,6 @@
 from flask import Flask, request, render_template, redirect, url_for, flash, send_from_directory
 import productService
+import categoryService
 
 app = Flask(__name__)
 app.secret_key = 'mysecretkey'
@@ -13,7 +14,7 @@ def node_modules(path):
 @app.route('/')
 def productlist():
     products = productService.all()
-    categories = productService.getCategoryList()
+    categories = categoryService.all()
     return render_template("home.html", products=products, categories=categories)
 
 
@@ -21,6 +22,13 @@ def productlist():
 def productdetails(product_id):
     product = productService.get(product_id)
     return render_template("product.html", product=product)
+
+
+@app.route('/category/<category_id>')
+def categorydetails(category_id):
+    category = categoryService.get(category_id)
+    products = categoryService.getProducts(category_id)
+    return render_template("category.html", category=category, products=products)
 
 
 @app.route('/newproduct', methods=['GET', 'POST'])
@@ -31,7 +39,7 @@ def addproduct():
         flash('New product %s successfully added!' % name)
         return redirect(url_for('addproduct'))
     else:
-        categories = productService.getCategoryList()
+        categories = categoryService.all()
         return render_template("addProduct.html", categories=categories)
 
 

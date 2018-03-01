@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% block title %}Product list{% endblock %}
+{% block title %}Home{% endblock %}
 {% block content %}
 <div class="columns">
     <div class="column is-one-third">
@@ -7,7 +7,7 @@
         <ul>
             {% for category in categories %}
             <li>
-                <a href="#">
+                <a href="/category/{{ category.id }}">
                     {{ category.name|e }}
                 </a>
             </li>
