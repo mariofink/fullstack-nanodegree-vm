@@ -2,7 +2,7 @@
 {% block title %}Add product{% endblock %}
 {% block content %}
 <h1>Add Product</h1>
-<form action="POST">
+<form method="POST" action="/newproduct">
     <div>
         <label for="name">Product name</label>
         <input type="text" id="name" name="name">
