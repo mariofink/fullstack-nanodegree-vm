@@ -24,6 +24,16 @@ def productdetails(product_id):
     return render_template("product.html", product=product)
 
 
+@app.route('/product/<product_id>/delete', methods=['GET', 'POST'])
+def deleteproduct(product_id):
+    if request.method == 'POST':
+        productService.delete(product_id)
+        return redirect(url_for('homepage'))
+    else:
+        product = productService.get(product_id)
+        return render_template("product-delete.html", product=product)
+
+
 @app.route('/category/<category_id>')
 def categorydetails(category_id):
     category = categoryService.get(category_id)

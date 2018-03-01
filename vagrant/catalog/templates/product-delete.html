@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}Delete {{ product.name|e }}?{% endblock %}
+{% block content %}
+<h2 class="is-size-2">Delete {{ product.name|e }} in {{ product.category.name|e }}?</h2>
+<form action="/product/{{ product.id }}/delete" method="post">
+    <div class="field is-grouped">
+        <div class="control">
+            <a class="button is-link" href="/">Cancel</a>
+        </div>
+        <div class="control">
+            <button class="button is-danger" type="submit">Delete permanently</button>
+        </div>
+    </div>
+</form>
+{% endblock %}

@@ -1,17 +1,17 @@
 {% extends "base.html" %}
 {% block title %}{{ product.name|e }}{% endblock %}
 {% block content %}
-<h2 class="is-size-2">{{ product.name|e }}</h2>
+<h2 class="is-size-2">{{ product.name|e }} <a href="/category/{{ product.category.id }}">({{ product.category.name|e }})</a></h2>
 <div class="content">
-    <h3 class="is-size-3">Category</h3>
-    <p>
-        <a href="/category/{{ product.category.id }}">{{ product.category.name|e }}</a>
-    </p>
-
-    <h3 class="is-size-3">Description</h3>
-    <p>
-        {{ product.description|e }}
-    </p>
+    {{ product.description|e }}
+</div>
+<div class="field is-grouped">
+    <div class="control">
+        <a class="button is-link" href="#">Edit</a>
+    </div>
+    <div class="control">
+        <a class="button is-text" href="/product/{{ product.id }}/delete">Delete</a>
+    </div>
 </div>
 <a href="/" class="button">Back to product list</a>
 {% endblock %}

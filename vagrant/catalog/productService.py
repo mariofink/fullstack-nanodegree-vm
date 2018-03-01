@@ -26,3 +26,10 @@ def create(form):
     db.session.add(product)
     db.session.commit()
     return product
+
+
+def delete(product_id):
+    """Remove a product from the database"""
+    product = get(product_id)
+    db.session.delete(product)
+    db.session.commit()
