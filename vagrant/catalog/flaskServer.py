@@ -17,6 +17,11 @@ def productlist():
     products = session.query(Product).all()
     return render_template("products.html", products=products)
 
+@app.route('/newproduct')
+def addproduct():
+    categories = session.query(Category).all()
+    return render_template("addProduct.html", categories=categories)
+
 
 if __name__ == '__main__':
     app.debug = True

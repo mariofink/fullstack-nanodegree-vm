@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}Add product{% endblock %}
+{% block content %}
+<h1>Add Product</h1>
+<form action="POST">
+    <div>
+        <label for="name">Product name</label>
+        <input type="text" id="name" name="name">
+    </div>
+
+    <div>
+        <label for="description">Product description</label>
+        <input type="text" id="description" name="description">
+    </div>
+
+    <div>
+        <label for="category"></label>
+        <select id="category" name="category">
+            <option value="">Choose…</option>
+            {% for category in categories %}
+            <option value="{{ category.id }}">{{ category.name }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <button type="submit">Add product</button>
+</form>
+{% endblock %}
