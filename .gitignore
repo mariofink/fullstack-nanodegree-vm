@@ -1,1 +1,4 @@
 *.sql
+venv/
+.idea/
+*.iml
