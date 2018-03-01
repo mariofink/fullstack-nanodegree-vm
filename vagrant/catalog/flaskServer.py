@@ -12,8 +12,8 @@ def node_modules(path):
 
 
 @app.route('/')
-def productlist():
-    products = productService.all()
+def homepage():
+    products = productService.recentlyAdded()
     categories = categoryService.all()
     return render_template("home.html", products=products, categories=categories)
 

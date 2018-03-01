@@ -21,7 +21,7 @@
                 {% for product in products %}
                 <li>
                     <a href="/product/{{ product.id }}">
-                        {{ product.category.name|e }} &mdash; {{ product.name|e }}
+                        {{ product.name|e }} ({{ product.category.name|e }})
                     </a>
                 </li>
                 {% endfor %}

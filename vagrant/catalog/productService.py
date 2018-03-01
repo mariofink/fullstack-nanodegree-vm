@@ -1,5 +1,6 @@
-from database_setup import Product, Category
+from database_setup import Product
 import databaseService as db
+from sqlalchemy import desc
 import datetime
 
 
@@ -11,6 +12,11 @@ def all():
 def get(product_id):
     """Get a specific product by its primary key"""
     return db.session.query(Product).get(product_id)
+
+
+def recentlyAdded():
+    """Return the last 10 recently added items"""
+    return db.session.query(Product).order_by(desc(Product.created)).limit(10)
 
 
 def create(form):
