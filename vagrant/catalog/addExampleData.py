@@ -1,11 +1,13 @@
 from database_setup import Product, Category, User
+import datetime
 import databaseService as db
 
 category1 = Category(name="My first category")
 db.session.add(category1)
 db.session.commit()
 
-product1 = Product(name="My first product", description="Some nice description", category=category1)
+product1 = Product(created=datetime.datetime.now(), name="My first product", description="Some nice description",
+                   category=category1)
 db.session.add(product1)
 db.session.commit()
 
