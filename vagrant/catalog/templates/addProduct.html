@@ -1,27 +1,43 @@
 {% extends "base.html" %}
 {% block title %}Add product{% endblock %}
 {% block content %}
-<h1>Add Product</h1>
+<h2 class="is-size-2">Add Product</h2>
 <form method="POST" action="/newproduct">
-    <div>
-        <label for="name">Product name</label>
-        <input type="text" id="name" name="name">
+    <div class="field">
+        <label class="label" for="name">Product name</label>
+        <div class="control">
+            <input class="input" type="text" id="name" name="name">
+        </div>
     </div>
 
-    <div>
-        <label for="description">Product description</label>
-        <input type="text" id="description" name="description">
+    <div class="field">
+        <label class="label" for="description">Product description</label>
+        <div class="control">
+            <input class="input" type="text" id="description" name="description">
+        </div>
     </div>
 
-    <div>
-        <label for="category"></label>
-        <select id="category" name="category">
-            <option value="">Choose…</option>
-            {% for category in categories %}
-            <option value="{{ category.id }}">{{ category.name }}</option>
-            {% endfor %}
-        </select>
+    <div class="field">
+        <label class="label" for="category">Category</label>
+        <div class="control">
+            <div class="select">
+                <select id="category" name="category">
+                    <option value="">Choose…</option>
+                    {% for category in categories %}
+                    <option value="{{ category.id }}">{{ category.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
     </div>
-    <button type="submit">Add product</button>
+
+    <div class="field is-grouped">
+        <div class="control">
+            <button class="button is-primary" type="submit">Add product</button>
+        </div>
+        <div class="control">
+            <a href="/" class="button is-text">Cancel</a>
+        </div>
+    </div>
 </form>
 {% endblock %}
