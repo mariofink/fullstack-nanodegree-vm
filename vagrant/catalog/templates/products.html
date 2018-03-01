@@ -5,7 +5,11 @@
 <div class="content">
     <ul>
         {% for product in products %}
-        <li>{{ product.category.name|e }} &mdash; {{ product.name|e }} &mdash; {{ product.description|e }}</li>
+        <li>
+            <a href="/product/{{ product.id }}">
+                {{ product.category.name|e }} &mdash; {{ product.name|e }}
+            </a>
+        </li>
         {% endfor %}
     </ul>
 </div>

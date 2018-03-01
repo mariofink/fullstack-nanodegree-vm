@@ -25,6 +25,12 @@ def productlist():
     return render_template("products.html", products=products)
 
 
+@app.route('/product/<product_id>')
+def productdetails(product_id):
+    product = session.query(Product).get(product_id)
+    return render_template("product.html", product=product)
+
+
 @app.route('/newproduct', methods=['GET', 'POST'])
 def addproduct():
     if request.method == 'POST':

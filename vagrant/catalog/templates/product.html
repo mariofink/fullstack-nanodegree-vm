@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}Product list{% endblock %}
+{% block content %}
+<h2 class="is-size-2">{{ product.name|e }}</h2>
+<div class="content">
+    <h3 class="is-size-3">Category</h3>
+    <p>
+        {{ product.category.name|e }}
+    </p>
+
+    <h3 class="is-size-3">Description</h3>
+    <p>
+        {{ product.description|e }}
+    </p>
+</div>
+<a href="/" class="button">Back to product list</a>
+{% endblock %}
