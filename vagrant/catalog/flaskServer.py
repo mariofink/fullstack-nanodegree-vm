@@ -13,7 +13,8 @@ def node_modules(path):
 @app.route('/')
 def productlist():
     products = productService.all()
-    return render_template("products.html", products=products)
+    categories = productService.getCategoryList()
+    return render_template("home.html", products=products, categories=categories)
 
 
 @app.route('/product/<product_id>')

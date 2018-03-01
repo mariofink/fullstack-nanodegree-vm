@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block title %}Product list{% endblock %}
+{% block content %}
+<div class="columns">
+    <div class="column is-one-third">
+        <h2 class="is-size-2">Categories</h2>
+        <ul>
+            {% for category in categories %}
+            <li>
+                <a href="#">
+                    {{ category.name|e }}
+                </a>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div class="column is-two-thirds">
+        <h2 class="is-size-2">Recently added</h2>
+        <div class="content">
+            <ul>
+                {% for product in products %}
+                <li>
+                    <a href="/product/{{ product.id }}">
+                        {{ product.category.name|e }} &mdash; {{ product.name|e }}
+                    </a>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+        <a href="/newproduct" class="button">Add new product</a>
+    </div>
+</div>
+
+{% endblock %}
