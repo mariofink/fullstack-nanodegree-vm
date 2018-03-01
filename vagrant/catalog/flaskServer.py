@@ -2,6 +2,7 @@ from flask import Flask, request, render_template, redirect, url_for, flash
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from database_setup import Base, Product, Category
+import productService
 
 app = Flask(__name__)
 app.secret_key = 'mysecretkey'
@@ -18,11 +19,13 @@ def productlist():
     products = session.query(Product).all()
     return render_template("products.html", products=products)
 
+
 @app.route('/newproduct', methods=['GET', 'POST'])
 def addproduct():
     if request.method == 'POST':
-        '''do something'''
-        flash("New product successfully added!")
+        product = productService.create(request.form)
+        name = product.name
+        flash('New product %s successfully added!' % name)
         return redirect(url_for('addproduct'))
     else:
         categories = session.query(Category).all()
