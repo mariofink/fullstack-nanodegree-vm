@@ -26,7 +26,7 @@
                 </li>
                 {% endfor %}
             </ul>
-            {% if login_session['username'] %}
+            {% if 'username' in login_session %}
             <p>
                 You are logged in as: {{ login_session['username'] }}
                 <a href="/gdisconnect">Log out</a>

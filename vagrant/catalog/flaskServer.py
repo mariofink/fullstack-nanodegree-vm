@@ -35,11 +35,15 @@ def homepage():
 @app.route('/product/<product_id>')
 def productdetails(product_id):
     product = productService.get(product_id)
-    return render_template("product.html", product=product)
+    return render_template("product.html", product=product, login_session=login_session)
 
 
 @app.route('/product/<product_id>/delete', methods=['GET', 'POST'])
 def deleteproduct(product_id):
+    if 'username' not in login_session:
+        flash("You are not authorised to delete products.")
+        return redirect("/")
+
     if request.method == 'POST':
         productService.delete(product_id)
         return redirect(url_for('homepage'))
@@ -57,6 +61,10 @@ def categorydetails(category_id):
 
 @app.route('/newproduct', methods=['GET', 'POST'])
 def addproduct():
+    if 'username' not in login_session:
+        flash("You are not authorised to create new products.")
+        return redirect("/")
+
     if request.method == 'POST':
         product = productService.create(request.form)
         name = product.name
@@ -69,6 +77,10 @@ def addproduct():
 
 @app.route('/product/<product_id>/edit', methods=['GET', 'POST'])
 def editproduct(product_id):
+    if 'username' not in login_session:
+        flash("You are not authorised to edit products.")
+        return redirect("/")
+
     product = productService.get(product_id)
     if request.method == 'POST':
         productService.update(product, request.form)

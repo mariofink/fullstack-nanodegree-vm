@@ -1,10 +1,12 @@
 {% extends "base.html" %}
 {% block title %}{{ product.name|e }}{% endblock %}
 {% block content %}
-<h2 class="is-size-2">{{ product.name|e }} <a href="/category/{{ product.category.id }}">({{ product.category.name|e }})</a></h2>
+<h2 class="is-size-2">{{ product.name|e }} <a href="/category/{{ product.category.id }}">({{ product.category.name|e
+    }})</a></h2>
 <div class="content">
     {{ product.description|e }}
 </div>
+{% if 'username' in login_session %}
 <div class="field is-grouped">
     <div class="control">
         <a class="button is-link" href="/product/{{ product.id }}/edit">Edit</a>
@@ -13,5 +15,6 @@
         <a class="button is-text" href="/product/{{ product.id }}/delete">Delete</a>
     </div>
 </div>
+{% endif %}
 <a href="/" class="button">Back to product list</a>
 {% endblock %}
