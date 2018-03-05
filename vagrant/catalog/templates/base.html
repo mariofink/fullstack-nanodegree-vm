@@ -10,9 +10,33 @@
     <script src="https://apis.google.com/js/platform.js" async defer></script>
 </head>
 <body>
+<nav class="navbar is-link" role="navigation" aria-label="main navigation">
+    <div class="container">
+        <div class="navbar-brand">
+            <h1 class="is-size-2 navbar-item">
+                My Product Catalogue
+            </h1>
+            {% if 'username' in login_session %}
+            <a href="/gdisconnect" class="navbar-item">Log out</a>
+            {% else %}
+            <a href="/login" class="navbar-item">
+                Log in
+            </a>
+            {% endif %}
+        </div>
+        <div class="navbar-menu">
+            <div class="navbar-end">
+                {% if 'username' in login_session %}
+                <div class="navbar-item">
+                    You are logged in as: {{ login_session['username'] }}
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</nav>
 <section class="section">
     <div class="container">
-        <h1 class="is-size-1">My Product Catalogue</h1>
         {% with messages = get_flashed_messages() %}
         {% if messages %}
         {% for message in messages %}

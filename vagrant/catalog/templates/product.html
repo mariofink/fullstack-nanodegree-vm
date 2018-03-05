@@ -7,6 +7,7 @@
     {{ product.description|e }}
 </div>
 {% if 'username' in login_session %}
+<hr>
 <div class="field is-grouped">
     <div class="control">
         <a class="button is-link" href="/product/{{ product.id }}/edit">Edit</a>
@@ -15,6 +16,7 @@
         <a class="button is-text" href="/product/{{ product.id }}/delete">Delete</a>
     </div>
 </div>
+<hr>
 {% endif %}
 <a href="/" class="button">Back to product list</a>
 {% endblock %}

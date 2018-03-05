@@ -16,26 +16,21 @@
     </div>
     <div class="column is-two-thirds">
         <h2 class="is-size-2">Recently added</h2>
-        <div class="content">
-            <ul>
-                {% for product in products %}
-                <li>
-                    <a href="/product/{{ product.id }}">
-                        {{ product.name|e }} ({{ product.category.name|e }})
-                    </a>
-                </li>
-                {% endfor %}
-            </ul>
-            {% if 'username' in login_session %}
-            <p>
-                You are logged in as: {{ login_session['username'] }}
-                <a href="/gdisconnect">Log out</a>
-            </p>
-            <a href="/newproduct" class="button">Add new product</a>
-            {% else %}
-            <a href="/login" class="button">Login</a>
-            {% endif %}
+        <ul>
+            {% for product in products %}
+            <li>
+                <a href="/product/{{ product.id }}">
+                    {{ product.name|e }} ({{ product.category.name|e }})
+                </a>
+            </li>
+            {% endfor %}
+        </ul>
+        {% if 'username' in login_session %}
+        <hr>
+        <div>
+            <a href="/newproduct" class="button is-primary">Add new product</a>
         </div>
+        {% endif %}
     </div>
 </div>
 

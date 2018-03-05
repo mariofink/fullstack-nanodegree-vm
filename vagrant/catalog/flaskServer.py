@@ -49,14 +49,14 @@ def deleteproduct(product_id):
         return redirect(url_for('homepage'))
     else:
         product = productService.get(product_id)
-        return render_template("product-delete.html", product=product)
+        return render_template("product-delete.html", product=product, login_session=login_session)
 
 
 @app.route('/category/<category_id>')
 def categorydetails(category_id):
     category = categoryService.get(category_id)
     products = categoryService.getProducts(category_id)
-    return render_template("category.html", category=category, products=products)
+    return render_template("category.html", category=category, products=products, login_session=login_session)
 
 
 @app.route('/newproduct', methods=['GET', 'POST'])
@@ -72,7 +72,7 @@ def addproduct():
         return redirect(url_for('addproduct'))
     else:
         categories = categoryService.all()
-        return render_template("addProduct.html", categories=categories)
+        return render_template("addProduct.html", categories=categories, login_session=login_session)
 
 
 @app.route('/product/<product_id>/edit', methods=['GET', 'POST'])
@@ -88,7 +88,7 @@ def editproduct(product_id):
         return redirect("/")
     else:
         categories = categoryService.all()
-        return render_template("editProduct.html", product=product, categories=categories)
+        return render_template("editProduct.html", product=product, categories=categories, login_session=login_session)
 
 
 @app.route('/api/v1/product/<product_id>')
