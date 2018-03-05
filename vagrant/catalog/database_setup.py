@@ -25,6 +25,16 @@ class Product(Base):
     category_id = Column(Integer, ForeignKey('category.id'))
     category = relationship(Category)
 
+    @property
+    def serialize(self):
+        """Return object data in easily serialisable format"""
+        return {
+            'id': self.id,
+            'name': self.name,
+            'description': self.description,
+            'category': self.category.name
+        }
+
 
 class User(Base):
     __tablename__ = 'user'
@@ -33,6 +43,7 @@ class User(Base):
     userid = Column(String(250), nullable=False)
     name = Column(String(250), nullable=False)
     password = Column(Text, nullable=False)
+
 
 engine = create_engine('sqlite:///catalog.db')
 

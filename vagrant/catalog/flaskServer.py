@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template, redirect, url_for, flash, send_from_directory
+from flask import Flask, request, render_template, redirect, url_for, flash, send_from_directory, jsonify
 import productService
 import categoryService
 
@@ -63,6 +63,19 @@ def editproduct(product_id):
     else:
         categories = categoryService.all()
         return render_template("editProduct.html", product=product, categories=categories)
+
+
+@app.route('/api/v1/product/<product_id>')
+def jsonifyProduct(product_id):
+    product = productService.get(product_id)
+    serialised = product.serialize
+    return jsonify(serialised)
+
+
+@app.route('/api/v1/products')
+def jsonifyProducts():
+    products = productService.all()
+    return jsonify(products=[i.serialize for i in products])
 
 
 if __name__ == '__main__':
