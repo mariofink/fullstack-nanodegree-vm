@@ -53,6 +53,18 @@ def addproduct():
         return render_template("addProduct.html", categories=categories)
 
 
+@app.route('/product/<product_id>/edit', methods=['GET', 'POST'])
+def editproduct(product_id):
+    product = productService.get(product_id)
+    if request.method == 'POST':
+        productService.update(product, request.form)
+        flash('Saved changes to %s.' % product.name)
+        return redirect("/")
+    else:
+        categories = categoryService.all()
+        return render_template("editProduct.html", product=product, categories=categories)
+
+
 if __name__ == '__main__':
     app.debug = True
     app.run(host='0.0.0.0', port=5000)

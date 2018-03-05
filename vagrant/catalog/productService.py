@@ -28,6 +28,17 @@ def create(form):
     return product
 
 
+def update(product, form):
+    """Update a product based on user input via POST request"""
+    product.updated = datetime.datetime.now()
+    product.name = form['name']
+    product.description = form['description']
+    product.category_id = form['category']
+    db.session.add(product)
+    db.session.commit()
+    return product
+
+
 def delete(product_id):
     """Remove a product from the database"""
     product = get(product_id)
