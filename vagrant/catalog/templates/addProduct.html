@@ -1,35 +1,16 @@
 {% extends "base.html" %}
+{% from "_formhelpers.html" import render_field, render_select %}
 {% block title %}Add product{% endblock %}
 {% block content %}
 <h2 class="is-size-2">Add Product</h2>
 <form method="POST" action="/newproduct">
-    <div class="field">
-        <label class="label" for="name">Product name</label>
-        <div class="control">
-            <input class="input" type="text" id="name" name="name">
-        </div>
-    </div>
+    {{ render_field(form.name, class='input') }}
 
-    <div class="field">
-        <label class="label" for="description">Product description</label>
-        <div class="control">
-            <input class="input" type="text" id="description" name="description">
-        </div>
-    </div>
+    {{ render_field(form.description, class='input') }}
 
-    <div class="field">
-        <label class="label" for="category">Category</label>
-        <div class="control">
-            <div class="select">
-                <select id="category" name="category">
-                    <option value="">Choose…</option>
-                    {% for category in categories %}
-                    <option value="{{ category.id }}">{{ category.name }}</option>
-                    {% endfor %}
-                </select>
-            </div>
-        </div>
-    </div>
+    {{ render_select(form.category) }}
+
+    {{ form.csrf_token }}
     <hr>
     <div class="field is-grouped">
         <div class="control">

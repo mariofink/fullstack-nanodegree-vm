@@ -5,6 +5,7 @@ import string
 import productService
 import categoryService
 import authService
+from forms import NewItemForm
 
 app = Flask(__name__)
 app.secret_key = 'mysecretkey'
@@ -65,14 +66,16 @@ def addproduct():
         flash("You are not authorised to create new products.")
         return redirect("/")
 
-    if request.method == 'POST':
+    form = NewItemForm(request.form)
+    form.category.choices = categoryService.all_as_dict()
+    if request.method == 'POST' and form.validate():
         product = productService.create(request.form)
         name = product.name
         flash('New product %s successfully added!' % name)
         return redirect(url_for('addproduct'))
     else:
         categories = categoryService.all()
-        return render_template("addProduct.html", categories=categories, login_session=login_session)
+        return render_template("addProduct.html", categories=categories, login_session=login_session, form=form)
 
 
 @app.route('/product/<product_id>/edit', methods=['GET', 'POST'])

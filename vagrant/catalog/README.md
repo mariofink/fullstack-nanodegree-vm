@@ -16,7 +16,7 @@ Furthermore it offers two endpoints to retrieve the product data in JSON format:
 * Single product: [http://localhost:5000/api/v1/product/1](http://localhost:5000/api/v1/product/1) (where 1 is the product id)
 * All products: [http://localhost:5000/api/v1/products](http://localhost:5000/api/v1/products)
 
-## Database setup
+## Initial setup
 
 * Bring up the Vagrant-based virtual machine by running
     
@@ -26,6 +26,10 @@ Furthermore it offers two endpoints to retrieve the product data in JSON format:
 * SSH into the virtual machine
 
         vagrant ssh
+        
+* Install Flask-WTF
+
+        sudo pip install Flask-WTF
         
 * Run the database setup script and import example data
 
