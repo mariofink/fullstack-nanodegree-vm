@@ -5,7 +5,7 @@ import string
 import productService
 import categoryService
 import authService
-from forms import ItemForm
+from forms import ItemForm, DeleteForm
 
 app = Flask(__name__)
 app.secret_key = 'mysecretkey'
@@ -45,12 +45,13 @@ def deleteproduct(product_id):
         flash("You are not authorised to delete products.")
         return redirect("/")
 
-    if request.method == 'POST':
+    form = DeleteForm(request.form)
+    if request.method == 'POST' and form.validate():
         productService.delete(product_id)
         return redirect(url_for('homepage'))
     else:
         product = productService.get(product_id)
-        return render_template("product-delete.html", product=product, login_session=login_session)
+        return render_template("product-delete.html", product=product, login_session=login_session, form=form)
 
 
 @app.route('/category/<category_id>')
