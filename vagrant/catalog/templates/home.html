@@ -26,8 +26,16 @@
                 </li>
                 {% endfor %}
             </ul>
+            {% if login_session['username'] %}
+            <p>
+                You are logged in as: {{ login_session['username'] }}
+                <a href="/gdisconnect">Log out</a>
+            </p>
+            <a href="/newproduct" class="button">Add new product</a>
+            {% else %}
+            <a href="/login" class="button">Login</a>
+            {% endif %}
         </div>
-        <a href="/newproduct" class="button">Add new product</a>
     </div>
 </div>
 

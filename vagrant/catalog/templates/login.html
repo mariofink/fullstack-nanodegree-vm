@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block title %}Home{% endblock %}
+{% block content %}
+<h2 class="is-size-2">Login</h2>
+
+<div id="signinButton">
+    <span class="g-signin" data-scope="openid email"
+          data-clientid="812612728924-oajqnvlo1luachg3c4oultub42avndbc.apps.googleusercontent.com"
+          data-redirecturi="postmessage" data-accesstype="offline" data-cookiepolicy="single_host_origin"
+          data-callback="signInCallback"
+          data-approvalprompt="force">
+    </span>
+</div>
+
+<div id="result"></div>
+
+<script>
+    function signInCallback(authResult) {
+        console.log("Auth result", authResult);
+        if (authResult.code) {
+            var request = new XMLHttpRequest();
+            request.open('POST', '/gconnect?state={{ login_session["state"] }}', true);
+            request.setRequestHeader('Content-Type', 'application/octet-stream; charset=utf-8');
+            request.onload = function () {
+                document.getElementById("result").innerHTML = request.responseText;
+                setTimeout(function () {
+                    window.location.href = "/";
+                }, 4000);
+            }
+            request.onerror = function () {
+                console.error("oops");
+            }
+            request.send(authResult.code);
+        } else {
+            console.error("Failed to make a server-side call.")
+            document.getElementById("result").innerHTML = "Failed to make a server-side call.";
+        }
+    }
+</script>
+
+{% if login_session['username'] %}
+<a href="/gdisconnect">Log out</a>
+{% endif %}
+{% endblock %}
