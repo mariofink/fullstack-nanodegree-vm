@@ -101,9 +101,11 @@ def gconnect():
 
 @app.route('/gdisconnect')
 def gdisconnect():
-    response = authService.gdisconnect(login_session)
-    flash("You have been logged out.")
-    return response
+    if authService.gdisconnect(login_session):
+        flash("You have been logged out.")
+    else:
+        flash("There was a problem logging you out.")
+    return redirect("/")
 
 
 if __name__ == '__main__':
