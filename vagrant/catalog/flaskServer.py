@@ -71,11 +71,17 @@ def deleteproduct(product_id):
         return redirect("/")
 
     form = DeleteForm(request.form)
+    product = productService.get(product_id)
+
     if request.method == 'POST' and form.validate():
-        productService.delete(product_id)
+        if login_session["email"] != product.user.userid:
+            # Only allow deletion for the user who created the product
+            flash("You are not authorised to delete this item")
+        else:
+            flash('Product %s has been deleted' % product.name)
+            productService.delete(product_id)
         return redirect(url_for('homepage'))
     else:
-        product = productService.get(product_id)
         return render_template("product-delete.html", product=product,
                                login_session=login_session, form=form)
 
@@ -107,7 +113,7 @@ def addproduct():
     form = ItemForm(request.form)
     form.category.choices = categoryService.all_as_dict()
     if request.method == 'POST' and form.validate():
-        product = productService.create(request.form)
+        product = productService.create(request.form, login_session["email"])
         name = product.name
         flash('New product %s successfully added!' % name)
         return redirect(url_for('addproduct'))
