@@ -23,6 +23,11 @@ Furthermore it offers two endpoints to retrieve the product data in JSON format:
         cd vagrant
         vagrant up
         
+* Install client-side dependencies
+
+        cd catalog
+        npm install
+        
 * SSH into the virtual machine
 
         vagrant ssh
