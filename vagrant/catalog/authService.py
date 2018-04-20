@@ -60,8 +60,9 @@ def gconnect(login_session):
     stored_access_token = login_session.get('access_token')
     stored_gplus_id = login_session.get('gplus_id')
     if stored_access_token is not None and gplus_id == stored_gplus_id:
-        response = make_response(json.dumps('Current user is already connected.'),
-                                 200)
+        response = make_response(
+            json.dumps('Current user is already connected.'),
+            200)
         response.headers['Content-Type'] = 'application/json'
         return response
 
@@ -97,7 +98,8 @@ def gdisconnect(login_session):
     if access_token is None:
         return True
 
-    url = 'https://accounts.google.com/o/oauth2/revoke?token=%s' % login_session['access_token']
+    url = 'https://accounts.google.com/o/oauth2/revoke?token=%s' % \
+          login_session['access_token']
     h = httplib2.Http()
     result = h.request(url, 'GET')[0]
 

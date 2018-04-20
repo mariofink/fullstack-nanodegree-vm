@@ -1,4 +1,5 @@
-from flask import Flask, request, render_template, redirect, url_for, flash, send_from_directory, jsonify
+from flask import Flask, request, render_template, redirect, url_for, flash, \
+    send_from_directory, jsonify
 from flask import session as login_session
 import random
 import string
@@ -30,13 +31,15 @@ def showLogin():
 def homepage():
     products = productService.recentlyAdded()
     categories = categoryService.all()
-    return render_template("home.html", products=products, categories=categories, login_session=login_session)
+    return render_template("home.html", products=products,
+                           categories=categories, login_session=login_session)
 
 
 @app.route('/product/<product_id>')
 def productdetails(product_id):
     product = productService.get(product_id)
-    return render_template("product.html", product=product, login_session=login_session)
+    return render_template("product.html", product=product,
+                           login_session=login_session)
 
 
 @app.route('/product/<product_id>/delete', methods=['GET', 'POST'])
@@ -51,14 +54,16 @@ def deleteproduct(product_id):
         return redirect(url_for('homepage'))
     else:
         product = productService.get(product_id)
-        return render_template("product-delete.html", product=product, login_session=login_session, form=form)
+        return render_template("product-delete.html", product=product,
+                               login_session=login_session, form=form)
 
 
 @app.route('/category/<category_id>')
 def categorydetails(category_id):
     category = categoryService.get(category_id)
     products = categoryService.getProducts(category_id)
-    return render_template("category.html", category=category, products=products, login_session=login_session)
+    return render_template("category.html", category=category,
+                           products=products, login_session=login_session)
 
 
 @app.route('/newproduct', methods=['GET', 'POST'])
@@ -76,7 +81,8 @@ def addproduct():
         return redirect(url_for('addproduct'))
     else:
         categories = categoryService.all()
-        return render_template("addProduct.html", categories=categories, login_session=login_session, form=form)
+        return render_template("addProduct.html", categories=categories,
+                               login_session=login_session, form=form)
 
 
 @app.route('/product/<product_id>/edit', methods=['GET', 'POST'])
@@ -96,7 +102,8 @@ def editproduct(product_id):
         form.name.data = product.name
         form.description.data = product.description
         form.category.data = product.category_id
-        return render_template("editProduct.html", product=product, login_session=login_session, form=form)
+        return render_template("editProduct.html", product=product,
+                               login_session=login_session, form=form)
 
 
 @app.route('/api/v1/product/<product_id>')
