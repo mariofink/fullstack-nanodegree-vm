@@ -23,7 +23,7 @@ def create(form, user_id):
     """Create a new product based on user input via POST request"""
     product = Product(created=datetime.datetime.now(), name=form['name'],
                       description=form['description'],
-                      user_id=user_id,
+                      userid=user_id,
                       category_id=form['category'])
     db.session.add(product)
     db.session.commit()

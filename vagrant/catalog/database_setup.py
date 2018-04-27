@@ -18,7 +18,7 @@ class User(Base):
     __tablename__ = 'user'
 
     id = Column(Integer, primary_key=True)
-    userid = Column(String(250), nullable=False)
+    userid = Column(String(250), nullable=False, unique=True)
     name = Column(String(250), nullable=False)
     password = Column(Text, nullable=False)
 
@@ -31,8 +31,8 @@ class Product(Base):
     updated = Column(DateTime)
     name = Column(String(250), nullable=False)
     description = Column(Text)
-    user_id = Column(Integer, ForeignKey('user.userid'))
     user = relationship(User)
+    userid = Column(String, ForeignKey('user.userid'))
     category_id = Column(Integer, ForeignKey('category.id'))
     category = relationship(Category)
 
@@ -48,6 +48,7 @@ class Product(Base):
         }
 
 
-engine = create_engine('sqlite:///catalog.db')
+engine = create_engine(
+    'postgresql+psycopg2://catalog:catalog@localhost/catalog')
 
 Base.metadata.create_all(engine)
